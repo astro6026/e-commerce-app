@@ -23,6 +23,7 @@ type Category {
     image: String!,
     categoryId: ID!,
     id: ID!,
+    category: Category,
  }
  `
 const items = [
@@ -152,6 +153,13 @@ const resolvers = {
         products: (parent, args, context) => {
             return items.filter(item=> item.categoryId === parent.id)
              //  console.log(parent, args, context, x);
+        }
+    },
+    Product : {
+        category: (parent, args, context) => {
+           // console.log(parent, args, context, x);
+            return categories.find(category=> category.id === parent.categoryId)
+             
         }
     }
 
