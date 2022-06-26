@@ -286,7 +286,7 @@ const products = [
     },
   ];
   
-  exports.db = {
+  module.exports = {
     products,
     categories,
     reviews,
