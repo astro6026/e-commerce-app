@@ -1,24 +1,16 @@
 const { ApolloServer, gql } = require("apollo-server");
-// String, Int, Float, Boolean, ID!
+// array can have null values if we just use [String], so use [String!] -> to not allow nullable values in the array, but we can stil return null
+// [String!]! -> to not allow null returned from the hello array.
 const typeDefs = gql`
  type Query {
-    hello: String!,
-    numberOfAnimals: Int, // can return null in absence of the value
-    price: Float,
-    isCool: Boolean,
+    hello: [String!]!,
  }
  `
 
  const resolvers = {
     Query: {
-        hello: () => {
-            return null
-        },
-        numberOfAnimals: () => {
-            return 31242;
-        },
-        price: ()=> 123.231,
-        isCool: () => false,
+       hello: () => ["hello", "this ",1, "an ", "arrya", "of ", "strings"],
+       //hello: () => null,
     }
  }
 
