@@ -11,6 +11,7 @@ const typeDefs = gql`
 type Category {
     id: ID!,
     name: String!
+    products: [Product!]!,
 }
 
  type Product {
@@ -116,6 +117,7 @@ const items = [
         categoryId: "d914aec0-25b2-4103-9ed8-225d39018d1d",
     },
 ];
+
 const categories = [
     {
         id: "c01b1ff4-f894-4ef2-b27a-22aacc2fca70",
@@ -146,6 +148,12 @@ const resolvers = {
             return categories?.find(category => category.id === categoryId) || []
         },
     },
+    Category : {
+        products: (parent, args, context) => {
+            return items.filter(item=> item.categoryId === parent.id)
+             //  console.log(parent, args, context, x);
+        }
+    }
 
 }
 
